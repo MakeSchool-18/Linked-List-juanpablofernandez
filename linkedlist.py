@@ -47,16 +47,13 @@ class LinkedList(object):
         """Return the length of this linked list by traversing its nodes"""
         # TODO: count number of items
         count = 0
-        if self.is_empty():
-            return count
-        else:
-            node = self.head
-            while True:
-                if node is not None:
-                    count += 1
-                    node = node.next
-                else:
-                    return count
+        node = self.head
+        while True:
+            if node is not None:
+                count += 1
+                node = node.next
+            else:
+                return count
         pass
 
     def append(self, item):
@@ -84,11 +81,36 @@ class LinkedList(object):
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError"""
         # TODO: find given item and delete if found
+        node = self.head
+
+        while node is not None:
+            next_node = node.next
+            if self.head.data == item:
+                if self.head == self.tail:
+                    self.head = None
+                    self.tail = None
+                else:
+                    self.head = self.head.next
+                return
+            elif next_node.data == item:
+                if next_node == self.tail:
+                    self.tail = node
+                else:
+                    node.next = next_node.next
+                return
+            node = node.next
+
+        raise ValueError("Error")
         pass
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality"""
         # TODO: find item where quality(item) is True
+        node = self.head
+        while node is not None:
+            if quality(node.data):
+                return node.data
+            node = node.next
         pass
 
 
