@@ -46,16 +46,39 @@ class LinkedList(object):
     def length(self):
         """Return the length of this linked list by traversing its nodes"""
         # TODO: count number of items
+        count = 0
+        if self.is_empty():
+            return count
+        else:
+            node = self.head
+            while True:
+                if node is not None:
+                    count += 1
+                    node = node.next
+                else:
+                    return count
         pass
 
     def append(self, item):
         """Insert the given item at the tail of this linked list"""
         # TODO: append given item
+        new_node = Node(item)
+        if self.is_empty():
+            self.head = new_node
+        else:
+            self.tail.next = new_node
+        self.tail = new_node
         pass
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list"""
         # TODO: prepend given item
+        new_node = Node(item)
+        if self.is_empty():
+            self.tail = new_node
+        else:
+            new_node.next = self.head
+        self.head = new_node
         pass
 
     def delete(self, item):
